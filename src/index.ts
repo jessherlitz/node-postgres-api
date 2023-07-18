@@ -10,9 +10,5 @@ const PORT = process.env.PORT || 3333
 app.use(express.json());
 app.use(userRoutes)
 
-app.get('/', (req: Request, res: Response) => {
-  res.send('This is home.');
-});
-
 app.listen(PORT, () => console.log(`Server is listening on PORT: ${PORT}`))
 

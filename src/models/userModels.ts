@@ -1,10 +1,6 @@
 import connection from "../database";
 
-
-
-export const Users: any = {}
-
-Users.createUser = async (
+interface createUserInput {
   firstName: string,
   lastName: string,
   email: string,
@@ -13,8 +9,12 @@ Users.createUser = async (
   state: string,
   city: string,
   country: string,
-  username: string) => {
+  username: string
+}
 
+export async function createUserModel(input: createUserInput): Promise<void> {
+
+  const { firstName, lastName, email, password, profileImg, state, city, country, username } = input;
 
   const conn = await connection.connect()
   await conn.query(`INSERT INTO users (
@@ -28,5 +28,4 @@ Users.createUser = async (
     country,
     username) VAlUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)`,
     [firstName, lastName, email, password, profileImg, state, city, country, username])
-
 }

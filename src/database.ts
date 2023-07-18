@@ -1,6 +1,5 @@
 import { Pool } from 'pg'
 
-
 const connection = new Pool({
   user: process.env.DATABASE_USER,
   host: process.env.DATABASE_HOST,
@@ -9,4 +8,4 @@ const connection = new Pool({
   port: parseInt(process.env.DATABASE_PORT!),
 })
 
-export default connection
+export default connection;
