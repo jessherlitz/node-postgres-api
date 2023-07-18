@@ -1,5 +1,7 @@
 import connection from "../database";
 
+// note to self: update userid to UUID; (string);
+
 interface createUserInput {
   firstName: string,
   lastName: string,
