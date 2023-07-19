@@ -1,7 +1,7 @@
 import { type Request, type Response } from "express";
 import { followModel } from '../models/followModels'
 
-export async function follow(req: Request, res: Response) {
+export async function createFollow(req: Request, res: Response) {
   try {
     const { followerId, followeeId } = req.body;
     await followModel!({ followeeId, followerId });

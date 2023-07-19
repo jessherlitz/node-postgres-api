@@ -1,10 +1,10 @@
 import { Router } from 'express'
-import { follow } from "../controllers/followControllers"
+import { createFollow } from "../controllers/followControllers"
 
 const router = Router();
 
 // router.get('/posts', getposts);
-router.post('/follow', follow);
+router.post('/follows', createFollow);
 // router.delete('/posts/post/:id', deletepost);
 
 export default router;
