@@ -1,13 +1,15 @@
+import { QueryResult } from "pg";
 import connection from "../database";
 
-interface createPostInput {
+interface Post {
+  postId?: string,
   parentPostId: string | null;
   postText: string,
   asset: string,
   userId: string,
 }
 
-export async function createPostModel(input: createPostInput): Promise<void> {
+export async function createPostModel(input: Post): Promise<void> {
 
   const { parentPostId, postText, asset, userId } = input;
 
@@ -19,4 +21,12 @@ export async function createPostModel(input: createPostInput): Promise<void> {
     post_user_id
     ) VAlUES ($1, $2, $3, $4)`,
     [parentPostId, postText, asset, userId])
+}
+
+export async function getPostsModel(): Promise<QueryResult<Post[]>> {
+
+  const conn = await connection.connect();
+  const queryResult = await conn.query(`SELECT * FROM POSTS`)
+
+  return queryResult;
 }
