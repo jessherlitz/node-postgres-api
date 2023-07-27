@@ -4,6 +4,10 @@ import { createPostModel, getPostsModel } from '../models/postModels'
 export async function createPost(req: Request, res: Response) {
   try {
     const { parentPostId, postText, asset, userId } = req.body;
+    if (!postText && !asset) {
+      return res.send('No text or asset.')
+    }
+
     await createPostModel!({ parentPostId, postText, asset, userId });
     return res.status(200).send();
 
@@ -15,9 +19,11 @@ export async function createPost(req: Request, res: Response) {
 
 export async function getPosts(req: Request, res: Response) {
   try {
-    const { rows: queryResult } = await getPostsModel!();
-    if (queryResult) {
-      return res.status(200).json(queryResult)
+    const userId = req.params.id
+    const { rows: data } = await getPostsModel!(userId);
+    if (data) {
+      console.log(data)
+      return res.status(200).json(data)
     }
   } catch (err) {
     console.log(err)

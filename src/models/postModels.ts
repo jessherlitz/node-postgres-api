@@ -23,10 +23,12 @@ export async function createPostModel(input: Post): Promise<void> {
     [parentPostId, postText, asset, userId])
 }
 
-export async function getPostsModel(): Promise<QueryResult<Post[]>> {
+export async function getPostsModel(userId: string): Promise<QueryResult<Post[]>> {
 
   const conn = await connection.connect();
-  const queryResult = await conn.query(`SELECT * FROM POSTS`)
+  const queryResult = await conn.query(`SELECT * FROM POSTS 
+      WHERE post_user_id IN 
+      (SELECT followee_user_id FROM follows WHERE follower_user_id = $1)`, [userId])
 
   return queryResult;
 }
