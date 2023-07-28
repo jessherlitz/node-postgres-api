@@ -22,7 +22,6 @@ export async function getPosts(req: Request, res: Response) {
     const userId = req.params.id
     const { rows: data } = await getPostsModel!(userId);
     if (data) {
-      console.log(data)
       return res.status(200).json(data)
     }
   } catch (err) {
