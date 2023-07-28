@@ -8,4 +8,9 @@ const connection = new Pool({
   port: parseInt(process.env.DATABASE_PORT!),
 })
 
+connection.connect(err => {
+  if (err) throw err;
+  console.log("Connected to database.");
+});
+
 export default connection;
